@@ -1,9 +1,17 @@
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Main from "./components/Main";
 
 function App() {
   return (
-    <div className='text-2xl font-bold text-center'>
-      <h1>Hello World</h1>
-    </div>
+    <>
+      <Navbar />
+      <Main />
+      <Routes>
+        <Route path="/" element={<Home />}/>
+      </Routes>
+    </>
   );
 }
 
