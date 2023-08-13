@@ -9,22 +9,23 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const { signUp } = UserAuth();
+  const { signUp, user } = UserAuth();
   const navigate = useNavigate();
 
-  const handleSignup = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('')
 
     try {
       await signUp(email, password)
-      // navigate('/account')
+      navigate('/')
 
     } catch (error) {
       setError(error.message)
       console.log(error.message)
 
     }
-    console.log({ email, password })
+    console.log(user)
   }
 
 
@@ -38,10 +39,11 @@ const SignUp = () => {
         <div className='max-w-[450px] h-[600px] mx-auto bg-black/75 backdrop-filter backdrop-blur-sm bg-opacity-100 text-white '>
           <div className='max-w-[320px] mx-auto py-16'>
             <h1 className='text-3xl font-bold'>Sign Up</h1>
-            <form className='w-full flex flex-col py-4'>
+            {error ? <p className='pt-4 text-red-600'>{error}</p> : null}
+            <form onSubmit={handleSubmit} className='w-full flex flex-col py-4'>
               <input onChange={(e) => setEmail(e.target.value)} className='p-3 my-2 bg-[#2e2e2e] rounded' type="email" placeholder='email' />
               <input onChange={(e) => setPassword(e.target.value)} className='p-3 my-2 bg-[#2e2e2e] rounded' type="password" placeholder='password' autoComplete='currentPassword' />
-              <button onClick={handleSignup} className='bg-red-600 py-3 my-6 rounded font-bold'>Sign Up</button>
+              <button className='bg-red-600 py-3 my-6 rounded font-bold'>Sign Up</button>
               <div className='flex justify-between items-center text-sm text-gray-500'>
                 <p>
                   <input type="checkbox" /> Remember Me
