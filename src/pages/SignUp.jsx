@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 const SignUp = () => {
   return (
@@ -15,6 +16,16 @@ const SignUp = () => {
               <input className='p-3 my-2 bg-[#2e2e2e] rounded' type="email" placeholder='email' />
               <input className='p-3 my-2 bg-[#2e2e2e] rounded' type="password" placeholder='password' autoComplete='currentPassword' />
               <button className='bg-red-600 py-3 my-6 rounded font-bold'>Sign Up</button>
+              <div className='flex justify-between items-center text-sm text-gray-500'>
+                <p>
+                  <input type="checkbox" /> Remember Me
+                </p>
+                <p>Need help?</p>
+              </div>
+              <p className='py-8 '>
+                <span className='text-gray-500'>Already have an account on Netflix?</span>{' '}
+                <Link className='text-white' to='/signin'>Sign In</Link>
+              </p>
             </form>
 
           </div>
