@@ -7,7 +7,7 @@ import {
     signOut
 } from 'firebase/auth';
 
-import { collection, addDoc, getDocs, setDoc, doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 const UserContext = createContext();
 

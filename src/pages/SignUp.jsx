@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
-import { auth } from '../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {

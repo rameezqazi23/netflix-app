@@ -6,7 +6,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Account from "./pages/Account";
 import ProtectedRoutes from "./components/ProtectedRoutes";
-
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
           } />
         </Routes>
       </AuthContextProvider>
+      <Analytics />
     </>
   );
 }
