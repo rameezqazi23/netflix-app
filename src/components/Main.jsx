@@ -15,7 +15,7 @@ const Main = () => {
         })
     }, [])
 
-    console.log(movie)
+    // console.log(movie)
     // console.log(num)
 
     const truncateString = (str, num) => {

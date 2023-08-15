@@ -4,6 +4,7 @@ import { db } from '../firebase/firebase';
 import { UserAuth } from '../context/AuthContext';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { AiOutlineClose } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 
 const SavedMovie = () => {
@@ -16,10 +17,10 @@ const SavedMovie = () => {
             // console.log("Current data from firebase==>", doc.data().favourites)
         })
 
-    }, [user.email])
-    console.log("firebase data==>", savedMovie)
+    }, [user?.email])
+    // console.log("firebase data==>", savedMovie)
 
-    const pathRef = doc(db, 'users', `${user.email}`)
+    const pathRef = doc(db, 'users', `${user?.email}`)
     const removeFvt = async (passedId) => {
         try {
             const result = savedMovie.filter((item) => item.id !== passedId)
@@ -55,12 +56,36 @@ const SavedMovie = () => {
                     size={40} />
 
                 <div id={'slider'} className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'>
-                    {savedMovie?.map((item, index) => (
+                    {savedMovie.length > 0 ?
+                        (
+                            savedMovie?.map((item, index) => (
+                                <div key={index} className='w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block relative cursor-pointer p-2'>
+                                    <img className='w-full h-auto block' src={`https://image.tmdb.org/t/p/w500${item?.image}`} alt={item?.title} />
+                                    <div className='absolute top-0 lsft-0 w-full h-full opacity-0 hover:opacity-100 text-white hover:bg-black/80 hover:ease-in-out duration-100'>
+                                        <p className='text-xs md:text-sm font-bold white-space-normal flex justify-center items-center text-center h-full'>
+                                            {item?.title}
+                                        </p>
+                                        <p onClick={() => removeFvt(item.id)} className='absolute text-gray-300 top-4 right-4'>
+                                            <AiOutlineClose />
+                                        </p>
+
+                                    </div>
+                                </div>
+                            ))
+                        )
+                        :
+                        (
+                            <p className='p-4'>
+                                <span className='text-xl text-gray-500'>Add your favourite movies</span>{' '}
+                                <Link to='/' className='text-xl text-white'>here</Link>
+                            </p>
+                        )}
+                    {/* {savedMovie?.map((item, index) => (
                         <div key={index} className='w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block relative cursor-pointer p-2'>
                             <img className='w-full h-auto block' src={`https://image.tmdb.org/t/p/w500${item?.image}`} alt={item?.title} />
                             <div className='absolute top-0 lsft-0 w-full h-full opacity-0 hover:opacity-100 text-white hover:bg-black/80 hover:ease-in-out duration-100'>
                                 <p className='text-xs md:text-sm font-bold white-space-normal flex justify-center items-center text-center h-full'>
-                                    {item.title}
+                                    {item?.title}
                                 </p>
                                 <p onClick={() => removeFvt(item.id)} className='absolute text-gray-300 top-4 right-4'>
                                     <AiOutlineClose />
@@ -68,7 +93,7 @@ const SavedMovie = () => {
 
                             </div>
                         </div>
-                    ))}
+                    ))} */}
 
                 </div>
                 <MdChevronRight
@@ -76,7 +101,7 @@ const SavedMovie = () => {
                     className='bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block'
                     size={40} />
 
-            </div>
+            </div >
         </>
     )
 }
