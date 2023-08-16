@@ -22,10 +22,10 @@ const SignIn = () => {
 
     } catch (error) {
       setError(error.message)
-      console.log(error.message)
+      // console.log(error.message)
 
     }
-    console.log("Successfully Signed In!")
+    // console.log("Successfully Signed In!")
 
   }
 
